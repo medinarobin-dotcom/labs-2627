@@ -27,12 +27,25 @@ $formattedBirthday = date("F d, Y", strtotime($_SESSION['birthday']));
 
 $birth = new DateTime($_SESSION['birthday']);
 $today = new DateTime();
-$age = $today->diff($birth)->y;
 
 $_SESSION['birthday'] = $formattedBirthday;
-$_SESSION['age'] = $age;
 
 $form_data = $_SESSION;
+
+$file = fopen("registrations.csv", "a");
+
+fputcsv($file, [
+    $_SESSION['fullname'],
+    $_SESSION['birthday'],
+    $_SESSION['contact'],
+    $_SESSION['sex'],
+    $_SESSION['program'],
+    $_SESSION['address'],
+    $_SESSION['email'],
+    $_SESSION['password']
+]);
+
+fclose($file);
 
 dump_session();
 

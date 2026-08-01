@@ -1,8 +1,10 @@
 <?php
 
-define('CUSTOMERS_FILE_PATH', 'customers-100.csv');
+$start_time = microtime(true);
 
-function get_hundred_customers_data()
+define('CUSTOMERS_FILE_PATH', 'customers-100000.csv');
+
+function get_customers_data()
 {
     $opened_file_handler = fopen(CUSTOMERS_FILE_PATH, 'r');
 
@@ -30,7 +32,7 @@ function get_hundred_customers_data()
     ];
 }
 
-$customers = get_hundred_customers_data();
+$customers = get_customers_data();
 
 ?>
 <html>
@@ -39,6 +41,10 @@ $customers = get_hundred_customers_data();
     <title>IPT10 Laboratory Activity #2</title>
     <link rel="icon" href="https://phpsandbox.io/assets/img/brand/phpsandbox.png">
     <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-4.15.0.min.css" />   
+
+    <script>
+        let pageStart = performance.now();
+    </script>
 </head>
 <body>
 
@@ -80,6 +86,35 @@ The dataset is retrieved from this URL <a href="https://www.datablist.com/learn/
     </tbody>
 </table>
 
+<?php
+
+$end_time = microtime(true);
+
+$execution_time = $end_time - $start_time;
+
+?>
+
+
+<p>
+<strong>PHP Execution Time:</strong>
+
+<?php echo round($execution_time, 6);?>
+seconds
+</p>
+
+<p id="loadTime"></p>
+
+<script>
+
+let pageEnd = performance.now();
+
+let loadTime = (pageEnd - pageStart) / 1000;
+
+
+document.getElementById("loadTime").innerHTML = "<strong>Complete Page Load Time:</strong> "+ loadTime.toFixed(3)+ " seconds";
+
+
+</script>
 
 </body>
 </html>

@@ -4,13 +4,33 @@ require "helpers/helper-functions.php";
 
 session_start();
 
-$contact_number = $_POST['contact_number'];
-$program = $_POST['program'];
+$email = $_POST['email'];
+$password = $_POST['password'];
 $agree = $_POST['agree'];
 
-$_SESSION['contact_number'] = $contact_number;
-$_SESSION['program'] = $program;
+if (
+    empty($email) ||
+    empty($password) ||
+    empty($agree)
+) {
+    header("Location: step-3.php");
+    exit;
+}
+
+$password = password_hash($password, PASSWORD_DEFAULT);
+
+$_SESSION['email'] = $email;
+$_SESSION['password'] = $password;
 $_SESSION['agree'] = $agree;
+
+$formattedBirthday = date("F d, Y", strtotime($_SESSION['birthday']));
+
+$birth = new DateTime($_SESSION['birthday']);
+$today = new DateTime();
+$age = $today->diff($birth)->y;
+
+$_SESSION['birthday'] = $formattedBirthday;
+$_SESSION['age'] = $age;
 
 $form_data = $_SESSION;
 

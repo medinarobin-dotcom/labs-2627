@@ -4,12 +4,18 @@ require "helpers/helper-functions.php";
 
 session_start();
 
-$birthdate = $_POST['birthdate'];
-$sex = $_POST['sex'];
+$program = $_POST['program'];
 $address = $_POST['address'];
 
-$_SESSION['birthdate'] = $birthdate;
-$_SESSION['sex'] = $sex;
+if (
+    empty($program) ||
+    empty($address)
+) {
+    header("Location: step-2.php");
+    exit;
+}
+
+$_SESSION['program'] = $program;
 $_SESSION['address'] = $address;
 
 dump_session();
@@ -37,27 +43,17 @@ dump_session();
         <form action="thank-you.php" method="POST">
 
           <fieldset>
-            <label>Contact Number</label>
-            <input type="text" name="contact_number" placeholder="+639123456789" />
+            <label>Email Address</label>
+            <input type="email" name="email" required>
 
-            <label>Program</label>
-            <select name="program">
-              <option disabled="disabled" selected="">Select an option</option>
-              <option value="cs">Computer Science</option>
-              <option value="it">Information Technology</option>
-              <option value="is">Information Systems</option>
-              <option value="se">Software Engineering</option>
-              <option value="ds">Data Science</option>
-            </select>
+            <label>Password</label>
+            <input type="password" name="password" required>
 
             <label class="p-checkbox--inline">
-            <input type="checkbox" name="agree">
+                <input type="checkbox" name="agree" value="yes" required>
             </label>
-            I agree to the terms and conditions...
-            
-            <br />
-            <br />
-
+            I agree to the terms and conditions.
+            <br><br>
             <button type="submit" class="p-button--positive">Finish</button>
           </fieldset>
 

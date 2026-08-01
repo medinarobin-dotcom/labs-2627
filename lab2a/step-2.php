@@ -5,13 +5,24 @@ require "helpers/helper-functions.php";
 session_start();
 
 $fullname = $_POST['fullname'];
-$email = $_POST['email'];
-# Encrypt the password first before saving it to the Session Variables
-$password = $_POST['password'];
+$birthday = $_POST['birthday'];
+$contact = $_POST['contact'];
+$sex = $_POST['sex'];
+
+if (
+    empty($fullname) ||
+    empty($birthday) ||
+    empty($contact) ||
+    empty($sex)
+) {
+    header("Location: index.php");
+    exit;
+}
 
 $_SESSION['fullname'] = $fullname;
-$_SESSION['email'] = $email;
-$_SESSION['password'] = $password;
+$_SESSION['birthday'] = $birthday;
+$_SESSION['contact'] = $contact;
+$_SESSION['sex'] = $sex;
 
 dump_session();
 
@@ -39,18 +50,11 @@ dump_session();
         <form action="step-3.php" method="POST">
 
           <fieldset>
-            <label>Birthdate</label>
-            <input type="date" name="birthdate">
-
-            <label>Sex</label>
-            <br />
-            <input type="radio" name="sex" value="male" checked="checked">Male
-            <br />
-            <input type="radio" name="sex" value="female">Female
-            <br />
+            <label>Program</label>
+            <input type="text" name="program" required>
 
             <label>Complete Address</label>
-            <textarea name="address" rows="3"></textarea>
+            <textarea name="address" rows="3" required></textarea>
 
             <button type="submit">Next</button>
           </fieldset>

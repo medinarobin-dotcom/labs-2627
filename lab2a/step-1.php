@@ -29,13 +29,20 @@ session_start();
 
         <fieldset>
           <label>Complete Name</label>
-          <input type="text" name="fullname" placeholder="John Doe">
+          <input type="text" name="fullname" placeholder="John Doe" required>
 
-          <label>Email address</label>
-          <input type="email" name="email" placeholder="example@canonical.com" autocomplete="email">
+          <label>Birthday</label>
+          <input type="date" name="birthday" required>
 
-          <label>Password</label>
-          <input type="password" name="password" placeholder="******" autocomplete="current-password">
+          <label>Contact Number</label>
+          <input type="text" name="contact" placeholder="09XXXXXXXXX" required>
+
+          <label>Sex</label>
+          <select name="sex" required>
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+          </select>
 
           <button type="submit">Next</button>
         </fieldset>

@@ -32,12 +32,12 @@ fclose($file);
 <tr>
     <th>Complete Name</th>
     <th>Birthday</th>
+    <th>Age</th>
     <th>Contact Number</th>
     <th>Sex</th>
     <th>Program</th>
     <th>Complete Address</th>
     <th>Email Address</th>
-    <th>Password</th>
 </tr>
 </thead>
 

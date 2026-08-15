@@ -2,36 +2,18 @@
 
 require "helpers.php";
 
-# from the $_SERVER global variable, check if the HTTP method used is POST, if its not POST, redirect to the index.php page
-# Reference: https://www.php.net/manual/en/reserved.variables.server.php
-
-// Supply the missing code
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
+    exit;
 }
 
-// Supply the missing code
 $complete_name = $_POST['complete_name'];
 $email = $_POST['email'];
 $birthdate = $_POST['birthdate'];
 $contact_number = $_POST['contact_number'];
 $agree = $_POST['agree'];
-$answer = $_POST['answer'] ?? null;
-$answers = $_POST['answers'] ?? null;
-if (!is_null($answer)) {
-    $answers .= $answer;
-}
 
 $questions = retrieve_questions();
-$current_question = get_current_question($answers);
-$current_question_number = get_current_question_number($answers);
-
-$target = 'quiz.php';
-if ($current_question_number == MAX_QUESTION_NUMBER) {
-    $target = 'result.php';
-}
-
-$options = get_options_for_question_number($current_question_number);
 ?>
 <html>
 <head>
@@ -41,42 +23,60 @@ $options = get_options_for_question_number($current_question_number);
 </head>
 <body>
 <section class="section">
-    <h1 class="title">Question <?php echo $current_question_number; ?> / <?php echo MAX_QUESTION_NUMBER; ?></h1>
-    <h2 class="subtitle">
-        <?php echo $current_question['question']; ?>
-    </h2>
+    <h1 class="title">Quiz</h1>
 
-    <!-- Supply the correct HTTP method and target form handler resource -->
+    <form method="POST" action="results.php" id="quizForm">
+        <input type="hidden" name="complete_name" value="<?php echo htmlspecialchars($complete_name); ?>" />
+        <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>" />
+        <input type="hidden" name="birthdate" value="<?php echo htmlspecialchars($birthdate); ?>" />
+        <input type="hidden" name="contact_number" value="<?php echo htmlspecialchars($contact_number); ?>" />
+        <input type="hidden" name="agree" value="<?php echo htmlspecialchars($agree); ?>" />
 
-    <form method="POST" action="<?php echo $target; ?>">
-        <input type="hidden" name="complete_name" value="<?php echo $complete_name; ?>" />
-        <input type="hidden" name="email" value="<?php echo $email; ?>" />
-        <input type="hidden" name="birthdate" value="<?php echo $birthdate; ?>" />
-        <input type="hidden" name="contact_number" value="<?php echo $contact_number; ?>" />
-        <input type="hidden" name="agree" value="<?php echo $agree; ?>" />
-        <!--
-        <input type="hidden" name="answers" />
-        -->
+        <?php $question_number = 1; ?>
 
-        <!-- Display the options -->
-        <?php foreach ($answers as $answer): ?>
-        <div class="field">
-            <div class="control">
-                <label class="radio">
-                    <input type="radio"
-                        name="answer"
-                        value="<?php echo $option['key']; ?>" />
-                        <?php echo $option['value']; ?>
-                </label>
+        <?php foreach ($questions['questions'] as $question): ?>
+
+            <?php $options = get_options_for_question_number($question_number); ?>
+
+            <div class="box">
+                <h2 class="subtitle">
+                    Question <?php echo $question_number; ?> / <?php echo MAX_QUESTION_NUMBER; ?>
+                </h2>
+
+                <h3 class="title is-5">
+                    <?php echo htmlspecialchars($question['question']); ?>
+                </h3>
+
+                <?php foreach ($options as $option): ?>
+                    <div class="field">
+                        <div class="control">
+                            <label class="radio">
+                                <input
+                                    type="radio"
+                                    name="answers[<?php echo $question_number; ?>]"
+                                    value="<?php echo htmlspecialchars($option['key']); ?>"
+                                    required
+                                />
+                                <?php echo htmlspecialchars($option['value']); ?>
+                            </label>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-        </div>
+
+            <?php $question_number++; ?>
+
         <?php endforeach; ?>
 
-        <!-- Start Quiz button -->
         <button type="submit" class="button">Submit</button>
     </form>
 </section>
 
+<script>
+    setTimeout(function () {
+        document.getElementById('quizForm').submit();
+    }, 60000);
+</script>
 
 </body>
 </html>

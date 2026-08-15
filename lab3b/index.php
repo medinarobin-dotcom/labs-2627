@@ -21,16 +21,16 @@
   <div class="col">
     <h4>File Upload</h4>
 
-    <form>
+    <form method="POST" action="uploaded.php" enctype="multipart/form-data">
         <div class="p-card">
-            <h3>Text File</h3>
+            <h3>Video File</h3>
             <p class="p-card__content">
-            <input type="file" name="text_file" accept=".txt" />
+                <input type="file" name="video_file" accept=".mp4,video/mp4" />
             </p>
         </div>
 
         <div>
-            <button>
+            <button type="submit">
                 Upload
             </button>
         </div>

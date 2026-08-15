@@ -1,7 +1,7 @@
 <?php
 
-$upload_directory = getcwd() . '/uploads/';
-$relative_path = '/uploads/';
+$upload_directory = getcwd() . '/sample-files/';
+$relative_path = '/sample-files/';
 
 if (isset($_FILES['pdf_file']) && $_FILES['pdf_file']['error'] === 0) {
     $uploaded_file = $upload_directory . basename($_FILES['pdf_file']['name']);

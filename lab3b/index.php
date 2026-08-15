@@ -22,28 +22,32 @@
     <h4>File Upload</h4>
 
     <form method="POST" action="uploaded.php" enctype="multipart/form-data">
+
         <div class="p-card">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             <h3>PDF File</h3>
             <p class="p-card__content">
-            <input type="file" name="pdf_file" accept=".pdf,application/pdf" />
-=======
+                <input type="file" name="pdf_file" accept=".pdf,application/pdf" />
+            </p>
+        </div>
+
+        <div class="p-card">
             <h3>Audio File</h3>
             <p class="p-card__content">
-            <input type="file" name="audio_file" accept=".mp3,audio/mpeg" />
->>>>>>> audio-file-upload
-=======
+                <input type="file" name="audio_file" accept=".mp3,audio/mpeg" />
+            </p>
+        </div>
+
+        <div class="p-card">
             <h3>Image File</h3>
             <p class="p-card__content">
                 <input type="file" name="image_file" accept="image/*" />
->>>>>>> image-file-upload
-=======
+            </p>
+        </div>
+
+        <div class="p-card">
             <h3>Video File</h3>
             <p class="p-card__content">
                 <input type="file" name="video_file" accept=".mp4,video/mp4" />
->>>>>>> video-file-upload
             </p>
         </div>
 
@@ -52,10 +56,12 @@
                 Upload
             </button>
         </div>
+
     </form>
-    </div>
+  </div>
+
   <div class="col">
-  <img class="p-logo-section__logo" src="https://www.auf.edu.ph/home/images/mascot/CCS.png" alt="College of Computing Studies">
+    <img class="p-logo-section__logo" src="https://www.auf.edu.ph/home/images/mascot/CCS.png" alt="College of Computing Studies">
   </div>
 </div>
 

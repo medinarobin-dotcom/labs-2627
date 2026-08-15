@@ -25,6 +25,7 @@
         <div class="p-card">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <h3>PDF File</h3>
             <p class="p-card__content">
             <input type="file" name="pdf_file" accept=".pdf,application/pdf" />
@@ -38,6 +39,11 @@
             <p class="p-card__content">
                 <input type="file" name="image_file" accept="image/*" />
 >>>>>>> image-file-upload
+=======
+            <h3>Video File</h3>
+            <p class="p-card__content">
+                <input type="file" name="video_file" accept=".mp4,video/mp4" />
+>>>>>>> video-file-upload
             </p>
         </div>
 

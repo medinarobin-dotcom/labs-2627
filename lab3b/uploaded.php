@@ -5,6 +5,7 @@ $relative_path = '/uploads/';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $uploaded_pdf_file = $upload_directory . basename($_FILES['pdf_file']['name']);
 $temporary_file = $_FILES['pdf_file']['tmp_name'];
 
@@ -44,3 +45,18 @@ if (move_uploaded_file($temporary_file, $uploaded_image_file)) {
     echo 'Failed to upload file';
 }
 >>>>>>> image-file-upload
+=======
+$uploaded_video_file = $upload_directory . basename($_FILES['video_file']['name']);
+$temporary_file = $_FILES['video_file']['tmp_name'];
+
+if (move_uploaded_file($temporary_file, $uploaded_video_file)) {
+    $video_file = $relative_path . basename($_FILES['video_file']['name']);
+    ?>
+    <video controls width="640">
+        <source src="<?php echo $video_file; ?>" type="video/mp4">
+    </video>
+    <?php
+} else {
+    echo 'Failed to upload file';
+}
+>>>>>>> video-file-upload
